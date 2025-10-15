@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Employee Management App')</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    @vite('resources/css/app.css')
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @yield('style')
 </head>
@@ -17,12 +17,12 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
-                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-2 rounded-lg shadow-lg">
-                            <span class="material-icons text-white text-2xl">business</span>
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-3 py-2 rounded-lg shadow-lg">
+                            <span class="material-icons text-white text-2xl mt-1">track_changes</span>
                         </div>
                         <div>
-                            <h1 class="text-xl font-bold text-gray-900">Employee Management System</h1>
-                            <p class="text-xs text-gray-500">Department of Informatics and Computer Engineering</p>
+                            <h1 class="text-xl font-bold text-gray-900">Quantum Pulse - Internal Management System</h1>
+                            <p class="text-xs text-gray-500">Tugas Mata Kuliah WABP</p>
                         </div>
                     </div>
                     <div class="hidden md:flex items-center space-x-4">
@@ -46,33 +46,58 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <ul class="flex items-center space-x-1 overflow-x-auto">
                     <li>
-                        <a href="{{ url('/employees') }}" class="flex items-center space-x-2 px-4 py-4 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-blue-600 border-b-4 border-blue-700 transition-all duration-300">
+                        <a href="{{ url('/employees') }}"
+                           @class([
+                                "flex items-center space-x-2 px-4 py-4 text-sm font-medium transition-all duration-300",
+                                "text-white bg-gradient-to-r from-blue-500 to-blue-600 border-b-4 border-blue-700" => request()->is('employees*'),
+                                "text-gray-600 hover:text-blue-600 hover:bg-blue-50 border-b-4 border-transparent hover:border-blue-300" => !request()->is('employees*'),
+                            ])>
                             <span class="material-icons text-lg">people</span>
                             <span>Employee</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/department') }}" class="flex items-center space-x-2 px-4 py-4 text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 border-b-4 border-transparent hover:border-blue-300 transition-all duration-300">
+                        <a href="{{ url('/departments') }}"
+                            @class([
+                                    "flex items-center space-x-2 px-4 py-4 text-sm font-medium transition-all duration-300",
+                                    "text-white bg-gradient-to-r from-blue-500 to-blue-600 border-b-4 border-blue-700" => request()->is('departments*'),
+                                    "text-gray-600 hover:text-blue-600 hover:bg-blue-50 border-b-4 border-transparent hover:border-blue-300" => !request()->is('departments*'),
+                            ])>
                             <span class="material-icons text-lg">apartment</span>
                             <span>Department</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/attendance') }}" class="flex items-center space-x-2 px-4 py-4 text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 border-b-4 border-transparent hover:border-blue-300 transition-all duration-300">
+                        <a href="{{ url('/positions') }}"
+                            @class([
+                                    "flex items-center space-x-2 px-4 py-4 text-sm font-medium transition-all duration-300",
+                                    "text-white bg-gradient-to-r from-blue-500 to-blue-600 border-b-4 border-blue-700" => request()->is('positions*'),
+                                    "text-gray-600 hover:text-blue-600 hover:bg-blue-50 border-b-4 border-transparent hover:border-blue-300" => !request()->is('positions*'),
+                            ])>
+                            <span class="material-icons text-lg">work</span>
+                            <span>Positiions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/attendances') }}"
+                            @class([
+                                    "flex items-center space-x-2 px-4 py-4 text-sm font-medium transition-all duration-300",
+                                    "text-white bg-gradient-to-r from-blue-500 to-blue-600 border-b-4 border-blue-700" => request()->is('attendances*'),
+                                    "text-gray-600 hover:text-blue-600 hover:bg-blue-50 border-b-4 border-transparent hover:border-blue-300" => !request()->is('attendances*'),
+                            ])>
                             <span class="material-icons text-lg">event_available</span>
                             <span>Attendance</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/report') }}" class="flex items-center space-x-2 px-4 py-4 text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 border-b-4 border-transparent hover:border-blue-300 transition-all duration-300">
-                            <span class="material-icons text-lg">assessment</span>
-                            <span>Report</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/settings') }}" class="flex items-center space-x-2 px-4 py-4 text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 border-b-4 border-transparent hover:border-blue-300 transition-all duration-300">
-                            <span class="material-icons text-lg">settings</span>
-                            <span>Settings</span>
+                        <a href="{{ url('/salaries') }}"
+                            @class([
+                                    "flex items-center space-x-2 px-4 py-4 text-sm font-medium transition-all duration-300",
+                                    "text-white bg-gradient-to-r from-blue-500 to-blue-600 border-b-4 border-blue-700" => request()->is('salaries*'),
+                                    "text-gray-600 hover:text-blue-600 hover:bg-blue-50 border-b-4 border-transparent hover:border-blue-300" => !request()->is('salaries*'),
+                            ])>
+                            <span class="material-icons text-lg">credit_score</span>
+                            <span>Salaries</span>
                         </a>
                     </li>
                 </ul>
@@ -92,15 +117,15 @@
                 <!-- Company Info -->
                 <div>
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-2 rounded-lg shadow-lg">
-                            <span class="material-icons text-white text-xl">business</span>
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-4 pb-3 pt-2 rounded-lg shadow-lg">
+                            <span class="material-icons text-white text-2xl mt-2">track_changes</span>
                         </div>
                         <div>
-                            <h3 class="font-bold text-gray-900">Employee</h3>
-                            <p class="text-xs text-gray-500">Management System</p>
+                            <h3 class="font-bold text-gray-900">Quantum Pulse - Internal Management System</h3>
+                            <p class="text-xs text-gray-500">Employee App</p>
                         </div>
                     </div>
-                    <p class="text-sm text-gray-600">Electronic Engineering Polytechnic Institute of Surabaya</p>
+                    <p class="text-sm text-gray-600">Tugas Mata Kuliah Workshop Aplikasi Berbasis Web</p>
                 </div>
 
                 <!-- Quick Links -->
@@ -148,7 +173,7 @@
                         </li>
                         <li class="flex items-center space-x-3">
                             <span class="material-icons text-blue-500 text-sm">email</span>
-                            <span class="text-sm text-gray-600">info@pens.ac.id</span>
+                            <span class="text-sm text-gray-600">info@quantumpulse.com</span>
                         </li>
                         <li class="flex items-center space-x-3">
                             <span class="material-icons text-blue-500 text-sm">language</span>
@@ -163,7 +188,7 @@
                 <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
                     <p class="text-sm text-gray-600 flex items-center space-x-2">
                         <span class="material-icons text-sm text-blue-500">copyright</span>
-                        <span>{{ date('Y') }} Employee Management App. All rights reserved.</span>
+                        <span>{{ date('Y') }} Quantum Pulse Employee Management App. All rights reserved.</span>
                     </p>
                     <div class="flex items-center space-x-4">
                         <a href="#" class="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200">Privacy Policy</a>

@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('title')
-    {{ $title }}
+    Add New Employee - Employee Management App
 @endsection
 
 @section('style')
@@ -67,7 +67,6 @@
 @endsection
 
 @section('content')
-    <!-- Form -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="mb-8">
             <div class="bg-white rounded-2xl card-shadow p-8">
@@ -80,14 +79,14 @@
 
                 <form action="{{ route('employees.store') }}" method="POST" class="space-y-6">
                     @csrf
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Full Name -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="input-container relative">
                             <input type="text"
                                    id="nama_lengkap"
                                    name="nama_lengkap"
                                    class="material-input w-full px-4 pt-4 pb-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-all duration-300 peer"
                                    required
+                                   value="{{ old('nama_lengkap') }}"
                                    onfocus="toggleLabel(this, true)"
                                    onblur="toggleLabel(this, false)">
                             <label for="nama_lengkap" class="floating-label absolute left-4 top-3 text-gray-500 pointer-events-none">
@@ -95,13 +94,13 @@
                             </label>
                         </div>
 
-                        <!-- Email -->
                         <div class="input-container relative">
                             <input type="email"
                                    id="email"
                                    name="email"
                                    class="material-input w-full px-4 pt-4 pb-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-all duration-300 peer"
                                    required
+                                   value="{{ old('email') }}"
                                    onfocus="toggleLabel(this, true)"
                                    onblur="toggleLabel(this, false)">
                             <label for="email" class="floating-label absolute left-4 top-3 text-gray-500 pointer-events-none">
@@ -109,13 +108,13 @@
                             </label>
                         </div>
 
-                        <!-- Phone Number -->
                         <div class="input-container relative">
                             <input type="tel"
                                    id="nomor_telepon"
                                    name="nomor_telepon"
                                    class="material-input w-full px-4 pt-4 pb-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-all duration-300 peer"
                                    required
+                                   value="{{ old('nomor_telepon') }}"
                                    onfocus="toggleLabel(this, true)"
                                    onblur="toggleLabel(this, false)">
                             <label for="nomor_telepon" class="floating-label absolute left-4 top-3 text-gray-500 pointer-events-none">
@@ -123,13 +122,13 @@
                             </label>
                         </div>
 
-                        <!-- Birth Date -->
-                        <div class="input-container relative label-floated-default">
+                        <div class="input-container relative">
                             <input type="date"
                                    id="tanggal_lahir"
                                    name="tanggal_lahir"
                                    class="material-input w-full px-4 pt-4 pb-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-all duration-300 peer"
                                    required
+                                   value="{{ old('tanggal_lahir') }}"
                                    onfocus="toggleLabel(this, true)"
                                    onblur="toggleLabel(this, false)">
                             <label for="tanggal_lahir" class="floating-label absolute left-4 top-3 text-gray-500 pointer-events-none">
@@ -137,7 +136,6 @@
                             </label>
                         </div>
 
-                        <!-- Address -->
                         <div class="input-container relative md:col-span-2">
                                 <textarea id="alamat"
                                           name="alamat"
@@ -145,19 +143,61 @@
                                           class="material-input w-full px-4 pt-4 pb-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-all duration-300 peer resize-none"
                                           required
                                           onfocus="toggleLabel(this, true)"
-                                          onblur="toggleLabel(this, false)"></textarea>
+                                          onblur="toggleLabel(this, false)">{{ old('alamat') }}</textarea>
                             <label for="alamat" class="floating-label absolute left-4 top-3 text-gray-500 pointer-events-none">
                                 Address
                             </label>
                         </div>
 
-                        <!-- Start Date -->
-                        <div class="input-container relative label-floated-default">
+                        {{-- Department Selection --}}
+                        <div class="input-container relative">
+                            <select id="departemen_id"
+                                    name="departemen_id"
+                                    class="material-input w-full px-4 pt-4 pb-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-all duration-300 peer"
+                                    required
+                                    onfocus="toggleLabel(this, true)"
+                                    onblur="toggleLabel(this, false)"
+                                    onchange="toggleLabel(this, false)">
+                                <option value="" disabled selected></option>
+                                @foreach($departments as $department)
+                                    <option value="{{ $department->id }}" {{ old('departemen_id') == $department->id ? 'selected' : '' }}>
+                                        {{ $department->nama_departemen }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <label for="departemen_id" class="floating-label absolute left-4 top-3 text-gray-500 pointer-events-none">
+                                Department
+                            </label>
+                        </div>
+
+                        {{-- Position Selection --}}
+                        <div class="input-container relative">
+                            <select id="jabatan_id"
+                                    name="jabatan_id"
+                                    class="material-input w-full px-4 pt-4 pb-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-all duration-300 peer"
+                                    required
+                                    onfocus="toggleLabel(this, true)"
+                                    onblur="toggleLabel(this, false)"
+                                    onchange="toggleLabel(this, false)">
+                                <option value="" disabled selected></option>
+                                @foreach($positions as $position)
+                                    <option value="{{ $position->id }}" {{ old('jabatan_id') == $position->id ? 'selected' : '' }}>
+                                        {{ $position->nama_jabatan }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <label for="jabatan_id" class="floating-label absolute left-4 top-3 text-gray-500 pointer-events-none">
+                                Position
+                            </label>
+                        </div>
+
+                        <div class="input-container relative">
                             <input type="date"
                                    id="tanggal_masuk"
                                    name="tanggal_masuk"
                                    class="material-input w-full px-4 pt-4 pb-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-all duration-300 peer"
                                    required
+                                   value="{{ old('tanggal_masuk') }}"
                                    onfocus="toggleLabel(this, true)"
                                    onblur="toggleLabel(this, false)">
                             <label for="tanggal_masuk" class="floating-label absolute left-4 top-3 text-gray-500 pointer-events-none">
@@ -165,17 +205,17 @@
                             </label>
                         </div>
 
-                        <!-- Status -->
-                        <div class="input-container relative label-floated-default">
+                        <div class="input-container relative">
                             <select id="status"
                                     name="status"
                                     class="material-input w-full px-4 pt-4 pb-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-all duration-300 peer"
                                     required
                                     onfocus="toggleLabel(this, true)"
-                                    onblur="toggleLabel(this, false)">
-                                <option value="" disabled selected></option> <!-- Hidden placeholder -->
-                                <option value="aktif">Active</option>
-                                <option value="nonaktif">Inactive</option>
+                                    onblur="toggleLabel(this, false)"
+                                    onchange="toggleLabel(this, false)">
+                                <option value="" disabled selected></option>
+                                <option value="aktif" {{ old('status') == 'aktif' ? 'selected' : '' }}>Active</option>
+                                <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Inactive</option>
                             </select>
                             <label for="status" class="floating-label absolute left-4 top-3 text-gray-500 pointer-events-none">
                                 Employment Status
@@ -183,12 +223,11 @@
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
                     <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
-                        <button type="button"
-                                class="px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all duration-300">
+                        <a href="{{ route('employees.index') }}"
+                           class="px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all duration-300">
                             Cancel
-                        </button>
+                        </a>
                         <button type="submit"
                                 class="btn-ripple px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center space-x-2">
                             <span class="material-icons text-sm">add</span>
@@ -203,28 +242,22 @@
     <script>
         function toggleLabel(input, isFocused) {
             const container = input.parentElement;
-
             if (isFocused) {
                 container.classList.add('input-focused');
             } else {
                 container.classList.remove('input-focused');
             }
-
-            // Check for content to apply 'filled' class
             if (input.value) {
                 container.classList.add('input-filled');
             } else {
                 container.classList.remove('input-filled');
             }
         }
-
         document.addEventListener('DOMContentLoaded', () => {
-            const inputs = document.querySelectorAll('.material-input');
-            inputs.forEach(input => {
+            document.querySelectorAll('.material-input').forEach(input => {
                 if (input.value) {
                     input.parentElement.classList.add('input-filled');
                 }
-
                 // For select elements, check selectedIndex
                 if (input.tagName === 'SELECT' && input.selectedIndex > 0) {
                     input.parentElement.classList.add('input-filled');

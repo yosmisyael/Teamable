@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Employee;
+use App\Models\Position;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -30,7 +32,11 @@ class EmployeeController extends Controller
     {
         $title = 'Add Employee';
 
-        return view('employees.create', compact('title'));
+        $departments = Department::all();
+
+        $positions = Position::all();
+
+        return view('employees.create', compact('title', 'departments', 'positions'));
     }
 
     /**
@@ -46,8 +52,10 @@ class EmployeeController extends Controller
             'alamat' => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
             'status' => 'required|string|max:50',
+            'departemen_id' => 'required|integer|exists:departments,id',
+            'jabatan_id' => 'required|integer|exists:positions,id',
         ]);
-        Employee::query()->create($request->all());
+        Employee::query()->create($request->all())->relation;
         return redirect()->route('employees.index');
     }
 
@@ -79,17 +87,13 @@ class EmployeeController extends Controller
     public function update(Request $request, string $id): RedirectResponse
     {
         $request->validate([
-            'nama_lengkap'
-            => 'required|string|max:255',
-            'email'
-            => 'required|email|max:255',
+            'nama_lengkap' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
             'nomor_telepon' => 'required|string|max:20',
             'tanggal_lahir' => 'required|date',
-            'alamat'
-            => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
-            'status'
-            => 'required|string|max:50',
+            'status' => 'required|string|max:50',
         ]);
 
         $employee = Employee::query()->findOrFail($id);
