@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\SalaryController;
 use \App\Http\Controllers\AdminController;
+use \App\Livewire\CompanyOnboarding;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,3 +17,8 @@ Route::get('/register', [AdminController::class, 'register'])->name('admin.regis
 Route::post('/register', [AdminController::class, 'handleRegister']);
 Route::get('/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('/login', [AdminController::class, 'handleLogin']);
+
+Route::middleware(['admin.auth', 'company.setup'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/onboarding', CompanyOnboarding::class)->name('admin.onboarding');
+});

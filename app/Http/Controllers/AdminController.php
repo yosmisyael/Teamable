@@ -51,4 +51,8 @@ class AdminController
 
         return redirect('/admin/dashboard');
     }
+
+    public function dashboard(): View {
+        return view('admin.dashboard');
+    }
 }
