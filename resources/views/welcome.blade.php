@@ -18,7 +18,7 @@
             <!-- Logo -->
             <div class="flex-shrink-0 flex items-center">
                 <img src="logo.svg" alt="logo" class="h-8">
-                <a href="#" class="text-3xl font-bold text-tertiary">eamable</a>
+                <a href="#" class="text-3xl font-bold text-primary">eamable</a>
             </div>
 
             <!-- Desktop Navigation Links -->
