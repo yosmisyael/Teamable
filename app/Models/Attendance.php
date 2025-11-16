@@ -10,19 +10,19 @@ class Attendance extends Model
     protected $table = 'attendance';
 
     protected $fillable = [
-        'karyawan_id',
-        'tanggal',
-        'waktu_masuk',
-        'waktu_keluar',
-        'status_absensi',
+        'employee_id',
+        'date',
+        'check_in_at',
+        'check_out_at',
+        'status',
     ];
 
     protected $casts = [
-        'tanggal' => 'date'
+        'date' => 'date'
     ];
 
     public function employee(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'karyawan_id');
+        return $this->belongsTo(Employee::class, 'employee_id');
     }
 }
