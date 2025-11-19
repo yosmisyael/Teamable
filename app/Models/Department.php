@@ -3,15 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Department extends Model
 {
     protected $fillable = [
-        'name'
+        'name',
+        'manager_id',
+        'is_active',
     ];
 
     public function employees(): HasMany {
-        return $this->hasMany(Employee::class, 'departemen_id');
+        return $this->hasMany(Employee::class, 'department_id', 'id');
+    }
+
+    public function manager(): BelongsTo {
+        return $this->belongsTo(Employee::class, 'manager_id');
     }
 }

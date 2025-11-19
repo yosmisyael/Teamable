@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-/**
- * @method static latest()
- */
 class Employee extends Model
 {
     use SoftDeletes;
@@ -28,6 +26,10 @@ class Employee extends Model
 
     public function department(): BelongsTo {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function managedDepartment(): HasOne {
+        return $this->hasOne(Department::class);
     }
 
     public function position(): BelongsTo {

@@ -10,7 +10,7 @@
             </div>
             <div>
                 <p class="text-sm text-gray-500">Total Departments</p>
-                <span class="text-2xl font-bold text-primary">6</span>
+                <span class="text-2xl font-bold text-primary">{{ $totalDepartments }}</span>
             </div>
             <span class="text-sm font-medium text-green-500">+12%</span>
         </div>
@@ -20,7 +20,7 @@
             </div>
             <div>
                 <p class="text-sm text-gray-500">Total Employees</p>
-                <span class="text-2xl font-bold text-primary">199</span>
+                <span class="text-2xl font-bold text-primary">{{ $totalEmployees }}</span>
             </div>
             <span class="text-sm font-medium text-green-500">+8%</span>
         </div>
@@ -30,7 +30,7 @@
             </div>
             <div>
                 <p class="text-sm text-gray-500">Average per Dept</p>
-                <span class="text-2xl font-bold text-primary">33</span>
+                <span class="text-2xl font-bold text-primary">{{ $averageEmployeesPerDepartment }}</span>
             </div>
         </div>
         <div class="bg-white p-5 rounded-lg shadow-md flex items-center space-x-4">
@@ -83,7 +83,7 @@
                     Export
                 </button>
                 <button
-                    wire:click="toggleForm"
+                    wire:click="toggleAddForm"
                     class="button-primary">
                         <span class="material-icons">
                             add
@@ -139,14 +139,6 @@
                         </td>
                         <td class="p-4 whitespace-nowrap">
                             <div class="flex items-center space-x-3">
-                                    <span class="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center"><svg
-                                            class="w-6 h-6 text-indigo-600" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                                                          d="M14.25 10.5a.75.75 0 01.75.75v.75H18a.75.75 0 01.75.75v3a.75.75 0 01-.75.75h-2.25v.75a.75.75 0 01-1.5 0v-.75H12a.75.75 0 01-.75-.75v-3a.75.75 0 01.75-.75h2.25v-.75a.75.75 0 01.75-.75zM5.25 6a.75.75 0 01.75-.75h12a.75.75 0 010 1.5H6a.75.75 0 01-.75-.75z"
-                                                                                          clip-rule="evenodd"/>
-                                        </svg>
-                                    </span>
                                 <div>
                                     <div class="text-sm font-medium text-gray-900">{{ $department->name }}</div>
                                     <div class="text-xs text-gray-500">Core Development</div>
@@ -156,47 +148,36 @@
                         <td class="p-4 whitespace-nowrap">
                             <div class="flex items-center space-x-3">
                                 <img class="w-9 h-9 rounded-full"
-                                     src="https://placehold.co/40x40/93D5F1/176688?text=M" alt="Michael Chen">
+                                     src="https://placehold.co/40x40/93D5F1/176688?text={{ $department->manager != null ? \Illuminate\Support\Str::substr($department->manager->name, 2) : '?' }}">
                                 <div>
-                                    <div class="text-sm font-medium text-gray-900">Michael Chen</div>
-                                    <div class="text-xs text-gray-500">EMP-2341</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ $department->manager != null ? $department->manager->name : 'Not set' }}</div>
+                                    <div class="text-xs text-gray-500">{{ $department->manager != null ? $department->manager->id : 'Not set' }}</div>
                                 </div>
                             </div>
                         </td>
-                        <td class="p-4 whitespace-nowrap text-sm text-gray-700 font-medium">42 <span
+                        <td class="p-4 whitespace-nowrap text-sm text-gray-700 font-medium">{{ $department->employees->count() }} <span
                                 class="text-green-500">Active</span></td>
                         <td class="p-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">Jan 15, 2023</div>
-                            <div class="text-xs text-gray-500">2 years ago</div>
+                            @php
+                                $date = Carbon\Carbon::parse($department->createdAt)
+                            @endphp
+                            <div class="text-sm text-gray-900">{{ $date->format('M d, Y') }}</div>
+                            <div class="text-xs text-gray-500">{{ $date->diffForHumans() }}</div>
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-medium">
                             <div class="flex items-center space-x-3">
-                                <a href="#" class="text-gray-400 hover:text-secondary">
-                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                         fill="currentColor">
-                                        <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
-                                        <path fill-rule="evenodd"
-                                              d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.675 7.697-4.97 0-9.186-3.223-10.675-7.69a.75.75 0 010-1.113zM12.001 18C7.859 18 4.172 15.34 2.864 12c1.308-3.34 5-6 9.137-6s7.828 2.66 9.136 6c-1.308 3.34-4.999 6-9.136 6z"
-                                              clip-rule="evenodd"/>
-                                    </svg>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-secondary">
-                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                         fill="currentColor">
-                                        <path
-                                            d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.5 7.125l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.219l-.81 2.428a.75.75 0 00.97 1.025l2.428-.81a5.25 5.25 0 002.22-1.32l8.4-8.4z"/>
-                                        <path
-                                            d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z"/>
-                                    </svg>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-red-500">
-                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                         fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                              d="M16.5 4.125a.75.75 0 01.75.75v.75h3.75a.75.75 0 010 1.5h-.75v13.125a3 3 0 01-3 3H7.5a3 3 0 01-3-3V7.125H3.75a.75.75 0 010-1.5h3.75v-.75a.75.75 0 01.75-.75h7.5zM10.5 7.125v13.5h3V7.125h-3z"
-                                              clip-rule="evenodd"/>
-                                    </svg>
-                                </a>
+                                {{--  action view  --}}
+                                <button class="text-gray-400 hover:text-secondary">
+                                    <span class="material-icons">visibility</span>
+                                </button>
+                                {{--  action edit  --}}
+                                <button wire:click="editDepartment({{ $department->id }})" class="text-gray-400 hover:text-secondary">
+                                    <span class="material-icons">edit_square</span>
+                                </button>
+                                {{--  action delete  --}}
+                                <button wire:click="toggleDeleteModal({{ $department->id }})" class="text-gray-400 hover:text-red-500">
+                                    <span class="material-icons">delete</span>
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -205,17 +186,17 @@
             </table>
         </div>
         <!-- Table Pagination -->
-
-            {{ $departments->links('components.pagination') }}
-        </div>
+        {{ $departments->links('components.pagination') }}
     </div>
 
-    {{--  add department form  --}}
+    {{--  Add Department Form  --}}
     <section
         class="h-screen w-1/3 {{ $isFormOpen ? 'translate-x-0' : 'translate-x-[100%]' }} transition-all duration-300 ease-out fixed right-0 top-0 z-10 bg-surface-high rounded-lg shadow-lg">
         <div class="p-6">
-            <h2 class="text-2xl text-primary font-bold">Add new department</h2>
             <form action="" wire:submit.prevent="saveDepartment" class="flex flex-col gap-4">
+                <h2 class="form-title">
+                    {{ $departmentToEditId ? 'Edit Department: ' . $this->name : 'Add New Department' }}
+                </h2>
                 <div class="input-group">
                     <label for="name" class="input-label">Department Name</label>
                     <div class="relative mt-1 rounded-md shadow-sm">
@@ -226,15 +207,46 @@
                     <p class="mt-2.5 text-sm text-red-500"><span class="font-medium">Invalid department name</span> {{ $message }}</p>
                     @enderror
                 </div>
-                <div class="flex gap-3 justify-end">
-                    <button wire:click="toggleForm" type="button" class="button-secondary w-fit">
+                <div class="input-group">
+                    <label for="manager" class="input-label">Department Manager</label>
+                    <div class="relative mt-1 rounded-md shadow-sm">
+                        <span class="material-icons text-xl text-primary input-icon">person</span>
+                        <select name="manager_id" id="manager_id" class="input-select">
+                            <option value="{{ null }}">Select department manager</option>
+
+                        </select>
+                    </div>
+                    @error('manager')
+                    <p class="mt-2.5 text-sm text-red-500"><span class="font-medium">Invalid department name</span> {{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="flex gap-3 justify-end mt-5">
+                    <button wire:click="toggleAddForm" type="button" class="button-secondary w-fit">
                         Cancel
                     </button>
                     <button type="submit" class="button-primary w-fit">
-                        Add Department
+                        {{ $departmentToEditId ? 'Save Changes' : 'Add Department' }}
                     </button>
                 </div>
             </form>
         </div>
     </section>
+
+    {{--  Delete Department Modal  --}}
+    @if($isDeleteModalOpen)
+        <section class="fixed w-full h-screen left-0 top-0 bg-black/10 flex justify-center items-center">
+            <div class="bg-surface-high p-4 w-fit rounded-lg">
+                <form wire:submit.prevent="deleteDepartment" class="flex flex-col gap-4">
+                    <h3 class="form-title">Delete Confirmation</h3>
+                    <p class="text-primary">Are you sure want to remove this department?</p>
+                    <div class="flex gap-3 justify-end">
+                        <button wire:click="toggleDeleteModal" type="button" class="button-secondary">
+                            Cancel
+                        </button>
+                        <button class="button-danger shadow-md border border-gray-200" type="submit">Remove</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    @endif
 </main>
