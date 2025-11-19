@@ -9,6 +9,7 @@ use \App\Http\Controllers\AdminController;
 use \App\Livewire\CompanyOnboarding;
 use \App\Livewire\DepartmentManagement;
 use \App\Livewire\JobManagement;
+use \App\Livewire\PositionManagement;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,7 +42,7 @@ Route::middleware(['admin.auth', 'company.setup'])->prefix('admin')->group(funct
         Route::get('/', JobManagement::class)->name('admin.jobs');
     });
     Route::prefix('positions')->group(function () {
-        Route::get('/', [EmployeeController::class, 'index'])->name('admin.positions');
+        Route::get('/', PositionManagement::class)->name('admin.positions');
     });
     Route::delete('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 });

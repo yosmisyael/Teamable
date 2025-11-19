@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('job_id');
             $table->foreign('job_id')
                 ->references('id')
-                ->on('jobs')
+                ->on('job_profiles')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
