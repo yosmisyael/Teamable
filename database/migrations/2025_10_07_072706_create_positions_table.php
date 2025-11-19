@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['available', 'unavailable'])->default('available');
+            $table->integer('required_talents')->nullable();
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('job_id');
             $table->foreign('job_id')

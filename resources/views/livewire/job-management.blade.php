@@ -17,7 +17,7 @@
             <div>
                 <p class="text-sm text-gray-500">Avg Base Salary</p>
                 {{-- Assuming a currency helper exists, or standard formatting --}}
-                <span class="text-2xl font-bold text-primary">${{ number_format($avgMinSalary / 1000) }}k</span>
+                <span class="text-2xl font-bold text-primary">Rp{{ number_format($avgMinSalary, decimal_separator: ',', thousands_separator: '.') }}</span>
             </div>
         </div>
         <div class="bg-white p-5 rounded-lg shadow-md flex items-center space-x-4">
@@ -26,7 +26,7 @@
             </div>
             <div>
                 <p class="text-sm text-gray-500">Avg Max Cap</p>
-                <span class="text-2xl font-bold text-primary">${{ number_format($avgMaxSalary / 1000) }}k</span>
+                <span class="text-2xl font-bold text-primary">Rp{{ number_format($avgMaxSalary, decimal_separator: ',', thousands_separator: '.') }}</span>
             </div>
         </div>
         <div class="bg-white p-5 rounded-lg shadow-md flex items-center space-x-4">
@@ -135,7 +135,7 @@
                         </td>
                         <td class="p-4 whitespace-nowrap">
                             <div class="text-sm font-medium text-gray-900">
-                                ${{ number_format($job->min_salary) }} - ${{ number_format($job->max_salary) }}
+                                Rp{{ number_format($job->min_salary, decimal_separator: ',', thousands_separator: '.') }} - ${{ number_format($job->max_salary, decimal_separator: ',', thousands_separator: '.') }}
                             </div>
                         </td>
                         <td class="p-4 whitespace-nowrap">
@@ -212,7 +212,7 @@
                     <div class="input-group">
                         <label for="min_salary" class="input-label">Min Salary</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <span class="material-icons text-xl text-primary input-icon">attach_money</span>
+                            <span class="material-icons text-xl text-primary input-icon">money</span>
                             <input id="min_salary" wire:model="min_salary" type="number" class="input-field" placeholder="0">
                         </div>
                         @error('min_salary')
@@ -224,7 +224,7 @@
                     <div class="input-group">
                         <label for="max_salary" class="input-label">Max Salary</label>
                         <div class="relative mt-1 rounded-md shadow-sm">
-                            <span class="material-icons text-xl text-primary input-icon">attach_money</span>
+                            <span class="material-icons text-xl text-primary input-icon">money</span>
                             <input id="max_salary" wire:model="max_salary" type="number" class="input-field" placeholder="0">
                         </div>
                         @error('max_salary')
