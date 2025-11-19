@@ -16,62 +16,6 @@
 @endsection
 
 @section('main')
-<!-- Top Navigation -->
-<header class="h-20 bg-white shadow-md flex items-center justify-between px-6 flex-shrink-0 mx-6 mt-2 rounded-lg">
-    <div class="flex items-center">
-        <!-- Mobile Menu Button (hidden on md+) -->
-        <button class="md:hidden mr-4 text-gray-600">
-            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-        </button>
-        <h1 class="text-2xl font-bold text-primary">Dashboard Overview</h1>
-    </div>
-
-    <div class="flex items-center space-x-5">
-        <!-- Search Bar -->
-        <div class="relative hidden sm:block">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
-                </svg>
-            </div>
-            <input type="text" class="bg-gray-100 rounded-full py-2 pl-10 pr-4 w-64 focus:outline-none focus:ring-2 focus:ring-secondary focus:bg-white" placeholder="Search...">
-        </div>
-
-        <!-- Notifications -->
-        <div class="relative">
-            <button class="text-gray-500 hover:text-primary">
-                <!-- Heroicon: bell -->
-                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path fill-rule="evenodd" d="M12 2.25c-2.42 0-4.64.93-6.27 2.47a.75.75 0 001.06 1.06A7.5 7.5 0 0112 4.5a7.5 7.5 0 016.21 3.28.75.75 0 101.06-1.06A8.98 8.98 0 0012 2.25zM12 18.75a.75.75 0 00.75-.75V15.75a.75.75 0 00-1.5 0v2.25a.75.75 0 00.75.75zM12 12.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5zM5.1 12.3a.75.75 0 10-1.06-1.06A8.98 8.98 0 002.25 12c0 2.42.93 4.64 2.47 6.27a.75.75 0 101.06-1.06A7.5 7.5 0 014.5 12a7.5 7.5 0 01.6-3.7zM18.9 12.3a.75.75 0 101.06-1.06A8.98 8.98 0 0021.75 12c0 2.42-.93 4.64-2.47 6.27a.75.75 0 10-1.06-1.06A7.5 7.5 0 0119.5 12a7.5 7.5 0 01-.6-3.7z" clip-rule="evenodd" />
-                </svg>
-            </button>
-            <span class="absolute top-0 right-0 -mt-1 -mr-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">2</span>
-        </div>
-
-        <!-- Profile Dropdown -->
-        <div class="relative">
-            <button class="flex items-center space-x-2">
-                <img class="w-10 h-10 rounded-full" src="https://placehold.co/40x40/93D5F1/176688?text=J" alt="John Admin">
-                <span class="hidden md:block font-medium text-gray-700">John Admin</span>
-                <!-- Heroicon: chevron-down -->
-                <svg class="w-5 h-5 text-gray-500 hidden md:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
-                </svg>
-            </button>
-            <!-- Dropdown Menu (hidden by default) -->
-            <!--
-            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden">
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-                <a href="login.html" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Log Out</a>
-            </div>
-            -->
-        </div>
-    </div>
-</header>
-
 <!-- Dashboard Content -->
 <main class="flex-1 overflow-y-auto p-6">
     <!-- Stat Cards -->

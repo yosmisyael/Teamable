@@ -1,6 +1,6 @@
-<aside class="w-64 bg-primary text-white flex-col hidden md:flex overflow-y-auto">
+<aside class="w-64 bg-surface-high shadow-md text-white flex-col hidden md:flex overflow-y-auto">
     <!-- Logo -->
-    <div class="h-20 flex items-center justify-center flex-shrink-0 bg-white m-2 rounded-lg">
+    <div class="h-20 flex items-center shadow-md justify-center flex-shrink-0 bg-white m-2 rounded-lg">
         <a href="index.html" class="text-3xl font-bold text-primary flex">
             <img src="{{asset('logo.ico')}}" alt="logo" class="h-8">
             eamable
@@ -29,7 +29,7 @@
             <span class="material-icons text-xl">payments</span>
             Payroll
         </a>
-        <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.departments.*') ? 'sidebar-link-active' : 'sidebar-link' }}">
+        <a href="{{ route('admin.departments') }}" class="{{ request()->routeIs('admin.departments') ? 'sidebar-link-active' : 'sidebar-link' }}">
             <span class="material-icons text-xl">domain</span>
             Department
         </a>
@@ -38,4 +38,12 @@
             Position
         </a>
     </nav>
+    <form action="/logout" method="POST" class="px-4 py-4 space-y-2">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="button-danger w-full">
+            <span class="material-icons text-xl">logout</span>
+            Sign Out
+        </button>
+    </form>
 </aside>

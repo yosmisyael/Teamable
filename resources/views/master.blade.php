@@ -10,7 +10,7 @@
     @yield('style')
 </head>
 
-<body class="font-sans antialiased text-gray-800 bg-white">
+<body class="font-sans antialiased text-gray-800 bg-surface">
     @yield('content')
 </body>
 </html>

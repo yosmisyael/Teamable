@@ -58,7 +58,7 @@ class CompanyOnboarding extends Component
 
     public function saveCompany(): null
     {
-        $validated = $this->validate([
+        $this->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'phone' => 'nullable|string|max:20|unique:companies,phone',

@@ -7,6 +7,7 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\SalaryController;
 use \App\Http\Controllers\AdminController;
 use \App\Livewire\CompanyOnboarding;
+use \App\Livewire\DepartmentManagement;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,7 +34,7 @@ Route::middleware(['admin.auth', 'company.setup'])->prefix('admin')->group(funct
         Route::get('/', [EmployeeController::class, 'index'])->name('admin.attendances');
     });
     Route::prefix('departments')->group(function () {
-        Route::get('/', [EmployeeController::class, 'index'])->name('admin.departments');
+        Route::get('/', DepartmentManagement::class)->name('admin.departments');
     });
     Route::prefix('positions')->group(function () {
         Route::get('/', [EmployeeController::class, 'index'])->name('admin.positions');
