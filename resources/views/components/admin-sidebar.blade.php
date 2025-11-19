@@ -25,7 +25,7 @@
             <span class="material-icons text-xl">account_tree</span>
             Position
         </a>
-        <a href="{{ route('admin.employees.index') }}" class="{{ request()->routeIs('admin.employees.*') ? 'sidebar-link-active' : 'sidebar-link' }}">
+        <a href="{{ route('admin.employees') }}" class="{{ request()->routeIs('admin.employees') ? 'sidebar-link-active' : 'sidebar-link' }}">
             <span class="material-icons text-xl">assignment_ind</span>
             Employees
         </a>

@@ -18,9 +18,9 @@ class Employee extends Model
         'phone',
         'birth_date',
         'address',
-        'start_date',
         'status',
         'department_id',
+        'job_id',
         'position_id',
     ];
 

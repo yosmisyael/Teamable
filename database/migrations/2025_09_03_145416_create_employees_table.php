@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('phone', 15);
             $table->date('birth_date');
             $table->text('address');
-            $table->date('start_date');
             $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->timestamps();
 
