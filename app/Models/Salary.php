@@ -9,14 +9,17 @@ class Salary extends Model
 {
     protected $fillable = [
         'employee_id',
-        'month',
         'base_salary',
         'allowance',
         'cut',
-        'total_salary',
+        'bank_account'
     ];
 
     public function employee(): BelongsTo {
         return $this->belongsTo(Employee::class, 'employee_id');
+    }
+
+    public function bank(): BelongsTo {
+        return $this->belongsTo(Bank::class, 'bank_account', 'id');
     }
 }

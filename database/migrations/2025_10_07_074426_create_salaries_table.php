@@ -13,17 +13,20 @@ return new class extends Migration
     {
         Schema::create('salaries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('employee_id');
-            $table->string('month', 10);
             $table->decimal('base_salary', 10, 2);
             $table->decimal('allowance', 10, 2)->default(0);
             $table->decimal('cut', 10, 2)->default(0);
-            $table->decimal('total_salary', 10, 2);
+            $table->string('back_account')->nullable();
             $table->timestamps();
 
-            $table->foreign('employee_id')
-                ->references('id')
-                ->on('employees')
+            $table->foreignId('employee_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreignId('bank_id')
+                ->constrained()
+                ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
     }
