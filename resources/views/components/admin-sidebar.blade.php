@@ -37,9 +37,9 @@
             <span class="material-icons text-xl">account_balance</span>
             Authorized Bank
         </a>
-        <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.payrolls.*') ? 'sidebar-link-active' : 'sidebar-link' }}">
+        <a href="{{ route('admin.salaries') }}" class="{{ request()->routeIs('admin.salaries') ? 'sidebar-link-active' : 'sidebar-link' }}">
             <span class="material-icons text-xl">payments</span>
-            Payroll
+            Salary
         </a>
         <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.recruits.*') ? 'sidebar-link-active' : 'sidebar-link' }}">
             <span class="material-icons text-xl">person_search</span>
