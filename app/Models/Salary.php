@@ -12,7 +12,8 @@ class Salary extends Model
         'base_salary',
         'allowance',
         'cut',
-        'bank_account'
+        'bank_account',
+        'bank_id',
     ];
 
     public function employee(): BelongsTo {
@@ -20,6 +21,11 @@ class Salary extends Model
     }
 
     public function bank(): BelongsTo {
-        return $this->belongsTo(Bank::class, 'bank_account', 'id');
+        return $this->belongsTo(Bank::class, 'bank_id', 'id');
+    }
+
+    public function getNetSalaryAttribute()
+    {
+        return ($this->base_salary + $this->allowance) - $this->cut;
     }
 }
