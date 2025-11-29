@@ -14,7 +14,12 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->string('address')->unique()->nullable();
+            $table->string('city')->unique()->nullable();
+            $table->string('state')->unique()->nullable();
+            $table->string('country')->unique()->nullable();
+            $table->string('postal_code')->unique()->nullable();
             $table->string('phone')->unique()->nullable();
             $table->date('founded_date')->nullable();
             $table->string('website')->nullable();
