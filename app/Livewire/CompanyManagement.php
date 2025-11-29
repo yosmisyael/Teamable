@@ -21,6 +21,10 @@ class CompanyManagement extends Component
     // Form Properties
     public string $name = '';
     public string $address = '';
+    public string $city = '';
+    public string $postal_code = '';
+    public string $state = '';
+    public string $country = '';
     public string $phone = '';
     public string $founded_date = '';
     public string $website = '';
@@ -39,6 +43,10 @@ class CompanyManagement extends Component
             $this->companyId = $company->id;
             $this->name = $company->name;
             $this->address = $company->address ?? '';
+            $this->city = $company->city ?? '';
+            $this->state = $company->state ?? '';
+            $this->country = $company->country ?? '';
+            $this->postal_code = $company->postal_code ?? '';
             $this->phone = $company->phone ?? '';
             $this->founded_date = $company->founded_date ? $company->founded_date->format('Y-m-d') : '';
             $this->website = $company->website ?? '';
@@ -54,6 +62,10 @@ class CompanyManagement extends Component
         $validated = $this->validate([
             'name' => 'required|string|max:255',
             'address' => 'nullable|string|max:255|unique:companies,address' . $uniqueIgnore,
+            'city' => 'nullable|string|max:255',
+            'state' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
+            'postal_code' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:20|unique:companies,phone' . $uniqueIgnore,
             'founded_date' => 'nullable|date',
             'website' => 'nullable|url|max:255',
@@ -63,7 +75,7 @@ class CompanyManagement extends Component
 
         if (!$this->companyId) {
             $validated['registered_by'] = Auth::id() ?? 1;
-            $company = Company::create($validated);
+            $company = Company::query()->create($validated);
             $this->companyId = $company->id;
             $message = 'Company registered successfully!';
         } else {

@@ -114,6 +114,51 @@
                             </div>
                         </div>
 
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <!-- City -->
+                            <div class="input-group">
+                                <label for="city" class="input-label">City</label>
+                                <div class="relative mt-1 rounded-md shadow-sm">
+                                    <span class="material-icons text-xl text-primary input-icon">location_city</span>
+                                    <input wire:model="city" id="city" type="text" class="input-field" placeholder="e.g. Jakarta">
+                                </div>
+                                @error('city') <p class="mt-2 text-sm text-red-500">{{ $message }}</p> @enderror
+                            </div>
+
+                            <!-- State -->
+                            <div class="input-group">
+                                <label for="state" class="input-label">State</label>
+                                <div class="relative mt-1 rounded-md shadow-sm">
+                                    <span class="material-icons text-xl text-primary input-icon">map</span>
+                                    <input wire:model="state" id="state" type="text" class="input-field" placeholder="e.g. West Java">
+                                </div>
+                                @error('state') <p class="mt-2 text-sm text-red-500">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <!-- country -->
+                            <div class="input-group">
+                                <label for="country" class="input-label">Country</label>
+                                <div class="relative mt-1 rounded-md shadow-sm">
+                                    <span class="material-icons text-xl text-primary input-icon">explore</span>
+                                    <input wire:model="country" id="country" type="text" class="input-field" placeholder="e.g. Indonesia">
+                                </div>
+                                @error('country') <p class="mt-2 text-sm text-red-500">{{ $message }}</p> @enderror
+                            </div>
+
+                            <!-- postal code -->
+                            <div class="input-group">
+                                <label for="postal_code" class="input-label">Postal Code</label>
+                                <div class="relative mt-1 rounded-md shadow-sm">
+                                    <span class="material-icons text-xl text-primary input-icon">local_post_office</span>
+                                    <input wire:model="postal_code" id="postal_code" type="text" class="input-field" placeholder="e.g. 64444">
+                                </div>
+                                @error('postal_code') <p class="mt-2 text-sm text-red-500">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
+
                         <!-- Address -->
                         <div class="input-group">
                             <label for="address" class="input-label">Headquarters Address</label>

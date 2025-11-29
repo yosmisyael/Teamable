@@ -239,7 +239,7 @@
 
     <div class="footer-section">
         <div class="signature-box">
-            <p style="margin-bottom: 5px;">Jakarta, {{ now()->format('d F Y') }}</p>
+            <p style="margin-bottom: 5px;">{{ $company->city }}, {{ now()->format('d F Y') }}</p>
             <p style="font-size: 10px; color: #777;">Approved By,</p>
             <div class="sign-space"></div>
             <p><strong>HR Manager</strong></p>

@@ -20,6 +20,14 @@ class CompanyOnboarding extends Component
 
     #[Rule('required|string|max:255')]
     public $address = '';
+    #[Rule('required|string|max:255')]
+    public $country = '';
+    #[Rule('required|string|max:255')]
+    public $state = '';
+    #[Rule('required|string|max:255')]
+    public $postal_code = '';
+    #[Rule('required|string|max:255')]
+    public $city = '';
 
     #[Rule('nullable|string|max:20|unique:companies,phone')]
     public $phone = '';
@@ -46,7 +54,7 @@ class CompanyOnboarding extends Component
             ]);
         }
 
-        $this->currentStep++;
+        if ($this->currentStep < 3) $this->currentStep++;
     }
 
     public function previousStep(): void
@@ -79,6 +87,10 @@ class CompanyOnboarding extends Component
             'description' => $this->description,
             'field' => $this->field,
             'registered_by' => $admin->id,
+            'postal_code' => $this->postal_code,
+            'city' => $this->city,
+            'country' => $this->country,
+            'state' => $this->state,
         ]);
 
         session()->flash('success', 'Company setup complete! Welcome to Teamable.');

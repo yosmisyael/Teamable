@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $company = Company::query()->create([
-            'name' => 'Stardrop Computing',
+            'name' => 'Stardrop',
             'registered_by' =>  $admin->id,
             'address' => 'Silicon Valley, United States',
             'website' => 'www.stardrop.com',

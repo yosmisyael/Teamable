@@ -28,7 +28,13 @@
                     <div class="w-8 h-8 rounded-full {{ $currentStep >= 2 ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }} flex items-center justify-center font-bold">
                         2
                     </div>
-                    <span class="font-medium {{ $currentStep >= 2 ? 'text-primary' : 'text-gray-400' }}">Optional Details</span>
+                    <span class="font-medium {{ $currentStep >= 2 ? 'text-primary' : 'text-gray-400' }}">Company Address</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full {{ $currentStep >= 3 ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }} flex items-center justify-center font-bold">
+                        2
+                    </div>
+                    <span class="font-medium {{ $currentStep >= 3 ? 'text-primary' : 'text-gray-400' }}">Optional Details</span>
                 </div>
             </div>
         </div>
@@ -38,8 +44,11 @@
             @if($currentStep == 1)
                 <h3 class="text-2xl font-semibold text-primary">Step 1: Company Essentials</h3>
                 <p class="text-gray-500 mt-1">Please provide your basic company information</p>
+            @elseif($currentStep == 2)
+                <h3 class="text-2xl font-semibold text-primary">Step 2: Company Address</h3>
+                <p class="text-gray-500 mt-1">Add location information about your company</p>
             @else
-                <h3 class="text-2xl font-semibold text-primary">Step 2: Optional Details</h3>
+                <h3 class="text-2xl font-semibold text-primary">Step 3: Optional Details</h3>
                 <p class="text-gray-500 mt-1">Add more information about your company</p>
             @endif
         </div>
@@ -61,18 +70,18 @@
                     @enderror
                 </div>
 
-                <!-- Company Address -->
+                <!-- Field input -->
                 <div>
-                    <label for="company-address" class="block text-sm font-medium text-gray-700">
-                        Company Address
+                    <label for="field" class="block text-sm font-medium text-gray-700">
+                        Company Field Operation
                         <span class="text-primary">*</span>
                     </label>
-                    <input type="text" name="company-address" id="company-address"
-                           wire:model.live="address"
+                    <input type="text" id="field"
+                           wire:model.live="field"
                            class="mt-1 focus:ring-secondary focus:border-secondary block w-full py-3 px-4 sm:text-sm border-gray-300 border-2 rounded-md"
-                           placeholder="Enter your complete business address">
-                    @error('address')
-                    <p class="mt-2.5 text-sm text-red-500"><span class="font-medium">Invalid address</span> {{ $message }}</p>
+                           placeholder="e.g., Technology, Healthcare, Finance">
+                    @error('field')
+                    <p class="mt-2.5 text-sm text-red-500"><span class="font-medium">Invalid fields</span> {{ $message }}</p>
                     @enderror
                 </div>
 
@@ -92,7 +101,85 @@
                 </div>
             @endif
 
-            @if ($currentStep == 2)
+            @if($currentStep == 2)
+                <!-- Company Address -->
+                <div>
+                    <label for="company-address" class="block text-sm font-medium text-gray-700">
+                        Company Address
+                        <span class="text-primary">*</span>
+                    </label>
+                    <input type="text" name="company-address" id="company-address"
+                           wire:model.live="address"
+                           class="mt-1 focus:ring-secondary focus:border-secondary block w-full py-3 px-4 sm:text-sm border-gray-300 border-2 rounded-md"
+                           placeholder="Enter your complete business address">
+                    @error('address')
+                    <p class="mt-2.5 text-sm text-red-500"><span class="font-medium">Invalid address</span> {{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- City -->
+                <div>
+                    <label for="company-address" class="block text-sm font-medium text-gray-700">
+                        City
+                        <span class="text-primary">*</span>
+                    </label>
+                    <input type="text" name="company-address" id="company-address"
+                           wire:model.live="city"
+                           class="mt-1 focus:ring-secondary focus:border-secondary block w-full py-3 px-4 sm:text-sm border-gray-300 border-2 rounded-md"
+                           placeholder="Enter company city location">
+                    @error('city')
+                    <p class="mt-2.5 text-sm text-red-500"><span class="font-medium">Invalid city</span> {{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- state -->
+                <div>
+                    <label for="state" class="block text-sm font-medium text-gray-700">
+                        Company State
+                        <span class="text-primary">*</span>
+                    </label>
+                    <input type="text" name="company-address" id="state"
+                           wire:model.live="state"
+                           class="mt-1 focus:ring-secondary focus:border-secondary block w-full py-3 px-4 sm:text-sm border-gray-300 border-2 rounded-md"
+                           placeholder="Enter your company state location">
+                    @error('state')
+                    <p class="mt-2.5 text-sm text-red-500">
+                        <span class="font-medium">Invalid state</span> {{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- country -->
+                <div>
+                    <label for="country" class="block text-sm font-medium text-gray-700">
+                        Company Country Location
+                        <span class="text-primary">*</span>
+                    </label>
+                    <input type="text" id="country"
+                           wire:model.live="country"
+                           class="mt-1 focus:ring-secondary focus:border-secondary block w-full py-3 px-4 sm:text-sm border-gray-300 border-2 rounded-md"
+                           placeholder="Enter your company country location">
+                    @error('country')
+                    <p class="mt-2.5 text-sm text-red-500"><span class="font-medium">Invalid country</span> {{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- postal code -->
+                <div>
+                    <label for="postal_code" class="block text-sm font-medium text-gray-700">
+                        Company Postal Code
+                        <span class="text-primary">*</span>
+                    </label>
+                    <input type="text" id="postal_code"
+                           wire:model.live="postal_code"
+                           class="mt-1 focus:ring-secondary focus:border-secondary block w-full py-3 px-4 sm:text-sm border-gray-300 border-2 rounded-md"
+                           placeholder="Enter your company postal code">
+                    @error('postal_code')
+                    <p class="mt-2.5 text-sm text-red-500"><span class="font-medium">Invalid postal code</span> {{ $message }}</p>
+                    @enderror
+                </div>
+            @endif
+
+            @if ($currentStep == 3)
                 <!-- Founded Date input -->
                 <div>
                     <label for="founded_date" class="block text-sm font-medium text-gray-700">
@@ -119,21 +206,6 @@
                            placeholder="https://example.com">
                     @error('website')
                     <p class="mt-2.5 text-sm text-red-500"><span class="font-medium">Invalid website URL</span> {{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Field input -->
-                <div>
-                    <label for="field" class="block text-sm font-medium text-gray-700">
-                        Company Field Operation
-                        <span class="text-primary">*</span>
-                    </label>
-                    <input type="text" id="field"
-                           wire:model.live="field"
-                           class="mt-1 focus:ring-secondary focus:border-secondary block w-full py-3 px-4 sm:text-sm border-gray-300 border-2 rounded-md"
-                           placeholder="e.g., Technology, Healthcare, Finance">
-                    @error('field')
-                    <p class="mt-2.5 text-sm text-red-500"><span class="font-medium">Invalid fields</span> {{ $message }}</p>
                     @enderror
                 </div>
 
